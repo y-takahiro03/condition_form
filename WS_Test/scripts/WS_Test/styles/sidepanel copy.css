@@ -1,0 +1,218 @@
+/* 基本のレイアウト */
+body {
+  margin: 0;
+  padding: 16px;
+  font-family:
+    "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    Meiryo, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+h4 {
+  margin: 16px 0 8px;
+  font-size: 14px;
+  color: #666;
+  border-left: 4px solid #00a0e9; /* アクセントカラー */
+  padding-left: 8px;
+}
+
+/* チップを並べるコンテナ */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px; /* ボタン同士の間隔 */
+  margin-bottom: 16px;
+}
+
+/* チップの基本スタイル */
+.chip,
+.chip-single {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px; /* 丸みをつけて「チップ」らしく */
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none; /* テキスト選択を防ぐ */
+  outline: none;
+}
+
+/* ホバー（マウスを乗せたとき） */
+.chip:hover,
+.chip-single:hover {
+  background-color: #eef9ff;
+  border-color: #00a0e9;
+}
+
+/* 選択された状態（Active） */
+.chip.selected,
+.chip-single.selected {
+  background-color: #00a0e9;
+  color: #fff;
+  border-color: #00a0e9;
+  box-shadow: 0 2px 4px rgba(0, 160, 233, 0.3);
+  font-weight: bold;
+}
+
+/* 出力エリアの調整 */
+
+/* sidepanel.css に追加 */
+#visual-svg-layer {
+  width: 100%;
+  height: 100%;
+}
+#output-area {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 2px dashed #ddd;
+}
+
+#result-text {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* 実行ボタン（転記） */
+#copy-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #00a0e9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0077b3; /* 押し下げ感のための立体感 */
+}
+
+#copy-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #0077b3;
+}
+
+/* --- クリアボタンを「押せるボタン」に変更 --- */
+#clear-btn {
+  width: 100%;
+  margin-top: 12px; /* 転記ボタンとの間隔を少し開ける */
+  padding: 12px;
+  background-color: #f0f0f0; /* 控えめなグレー */
+  color: #555;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none; /* 下線を消す */
+  box-shadow: 0 4px 0 #d0d0d0; /* 立体感（影） */
+  transition: all 0.1s ease; /* 少し滑らかに動かす */
+}
+
+/* ホバー時（マウスを乗せたとき） */
+#clear-btn:hover {
+  background-color: #e8e8e8;
+}
+
+/* クリックした瞬間（押し下げる動き） */
+#clear-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #d0d0d0;
+}
+
+/* --- SVGレイアウト用 --- */
+.svg-wrapper {
+  width: 100%;
+  max-width: 320px; /* サイドパネルの幅に合わせて調整 */
+  margin: 0 auto 10px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.svg-wrapper svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- SVGパーツのインタラクション --- */
+.selectable-part {
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    fill 0.2s;
+}
+
+/* JSで付与するホバー用クラス */
+.selectable-part.hovered {
+  opacity: 0.6;
+}
+/* 選択時のクラス */
+.selectable-part.selected {
+  fill: #ff5252 !important;
+  opacity: 0.8;
+}
+
+/* --- 前後切り替えタブ --- */
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.toggle-btn {
+  padding: 6px 24px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #00a0e9;
+  background-color: #fff;
+  border: 2px solid #00a0e9;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.toggle-btn:hover {
+  background-color: #eef9ff;
+}
+
+.toggle-btn.active {
+  background-color: #00a0e9;
+  color: #fff;
+}
+
+/* --- 背面画像のサイズ微調整 --- */
+#back-view svg {
+  /* 1.0 が元のサイズ。0.9 だと 90% の大きさに縮小されます */
+  /* 前面の大きさとぴったり合うように、0.85 〜 0.95 の間で数値を調整してみてください */
+  transform: scale(0.85);
+
+  /* 縮小する際の基準点（中央を基準に縮小する） */
+  transform-origin: center center;
+}
+
+/* --- 「多数」ボタン専用のスタイル --- */
+/* ホバー時（マウスを乗せたときに、うっすら赤くする） */
+.chip-single[data-value="多数"]:hover {
+  background-color: rgba(238, 53, 53, 0.1);
+  border-color: #ff5252;
+  color: rgb(0, 0, 0);
+}
+
+/* 選択時（指定された赤色で塗りつぶす） */
+.chip-single[data-value="多数"].selected {
+  background-color: #ff5252 !important; /* 既存の青を上書きするために!importantを付けます */
+  color: #fff !important;
+  border-color: #ff5252 !important;
+  box-shadow: 0 2px 4px rgba(238, 53, 53, 0.3) !important;
+}
