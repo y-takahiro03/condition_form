@@ -1,2 +1,0 @@
-テキストのみの保存らしい
-chrome.storage.local.get(null, console.log)
