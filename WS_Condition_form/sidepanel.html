@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles/sidepanel.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="main-view">
+        <header>
+          <!-- <h3>コンディション入力支援</h3>
+        <div id="category-display">
+          カテゴリ: <span id="current-category">ジャケット</span>
+        </div> -->
+        </header>
+
+        <section id="visual-picker" data-mode="svg">
+          <div class="visual-picker-layout">
+            <div class="side-controls">
+              <button id="btn-mode-svg" class="toggle-btn active">
+                アイコン
+              </button>
+              <button id="btn-mode-chip" class="toggle-btn">ボタン</button>
+              <button
+                id="btn-favorite-open"
+                class="icon-btn"
+                title="お気に入り"
+              >
+                <svg
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    style="fill: #4b4b4b"
+                    d="M373.597,29.736c-0.938,0-1.856,0.009-2.795,0.03C313.675,30.864,276.726,59.028,256,93.182c-20.726-34.154-57.675-62.318-114.802-63.416c-0.928-0.021-1.866-0.03-2.796-0.03c-38.566,0-73.559,15.465-98.518,43.538C13.797,102.626,0,143.789,0,192.309c0,95.273,76.404,153.378,150.284,209.566c28.513,21.684,57.975,44.098,83.483,68.688l1.138,1.547c5.062,6.24,12.419,9.904,20.296,10.134l0.8,0.02l0.838-0.02c7.847-0.24,15.186-3.894,20.247-10.114l1.158-1.578c25.498-24.59,54.97-47.003,83.473-68.678C435.596,345.687,512,287.583,512,192.309C512,96.586,455.083,29.736,373.597,29.736z M371.391,357.748c-37.12,28.952-78.172,57.866-113.654,92.099c-0.689,0.668-1.248,1.238-1.747,1.777c-0.519-0.549-1.018-1.088-1.726-1.777c-47.303-45.615-104.52-81.895-149.116-121.202c-22.313-19.618-41.412-39.904-54.79-62.088c-13.378-22.204-21.184-46.164-21.215-74.248c0.02-44.228,12.81-77.493,32.528-99.677c19.757-22.164,46.573-33.705,76.733-33.764l2.237,0.03c33.775,0.708,57.835,12.67,75.017,29.681c17.132,17.022,27.165,39.556,30.77,60.99c0.788,4.682,4.821,8.097,9.574,8.097c4.752,0,8.785-3.414,9.574-8.097c3.604-21.434,13.638-43.967,30.77-60.99c17.181-17.012,41.242-28.973,75.017-29.681l2.236-0.03c30.161,0.059,56.976,11.6,76.735,33.764c19.717,22.184,32.507,55.449,32.526,99.677c-0.03,28.084-7.837,52.044-21.215,74.248C441.605,299.833,408.54,328.815,371.391,357.748z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="main-display">
+              <div class="top-controls">
+                <button id="btn-front" class="toggle-btn active">前</button>
+                <button id="btn-back" class="toggle-btn">後</button>
+              </div>
+
+              <div class="svg-wrapper">
+                <div id="front-view">
+                  <div id="front-svg-container" class="svg-area"></div>
+                  <div class="chip-area">
+                    <div
+                      class="chip-group"
+                      style="margin-top: 12px; justify-content: center"
+                    ></div>
+                  </div>
+                </div>
+
+                <div id="back-view" style="display: none">
+                  <div id="back-svg-container" class="svg-area"></div>
+                  <div class="chip-area">
+                    <div
+                      class="chip-group"
+                      style="margin-top: 12px; justify-content: center"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p id="selected-part-name">選択部位: なし</p>
+        </section>
+
+        <section id="severity-selector">
+          <h4>程度・範囲</h4>
+          <div class="chip-group" id="severity-chips"></div>
+        </section>
+        <section id="damage-selector">
+          <h4>損傷内容</h4>
+          <div class="chip-group" id="damage-chips"></div>
+        </section>
+        <section id="output-area">
+          <textarea
+            id="result-text"
+            placeholder="ここに文章が生成されます"
+          ></textarea>
+          <div class="action-buttons">
+            <button id="copy-btn">フォームに転記</button>
+            <button id="clear-btn">クリア</button>
+          </div>
+        </section>
+      </div>
+      <div id="favorite-list-view" style="display: none">
+        <div class="view-header">
+          <button id="btn-fav-back-main" class="text-btn">戻る</button>
+
+          <button id="btn-fav-add-new" class="icon-btn plus-btn">+</button>
+          <div style="width: 48px"></div>
+        </div>
+        <div id="favorite-items-container" class="list-container"></div>
+        <section id="output-area-fav">
+          <div class="action-buttons">
+            <button id="fav-copy-btn">選択した文字を転記</button>
+          </div>
+        </section>
+      </div>
+      <div id="favorite-add-view" style="display: none">
+        <div class="view-header">
+          <button id="btn-fav-back-list" class="text-btn">戻る</button>
+          <h3 id="fav-view-title" style="margin: 0">文字を登録</h3>
+          <div style="width: 32px"></div>
+        </div>
+        <div class="form-container">
+          <textarea
+            id="new-fav-text"
+            placeholder="登録したい文字を入力してください"
+          ></textarea>
+          <button id="btn-fav-save" class="primary-btn">保存</button>
+        </div>
+      </div>
+      <div id="toast-container"></div>
+
+      <div id="custom-confirm" class="modal-overlay" style="display: none">
+        <div class="modal-content">
+          <p id="confirm-message">本当に削除しますか？</p>
+          <div class="modal-actions">
+            <button id="confirm-cancel" class="cancel-btn">キャンセル</button>
+            <button id="confirm-ok" class="danger-btn">削除する</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>

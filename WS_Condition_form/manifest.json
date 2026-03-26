@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "condition_input",
+  "version": "1.0",
+  "description": "商品のデータ入力を補助するツールです。アイコンやボタン選択することで入力できます。",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": ["sidePanel", "storage"],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "action": {
+    "default_title": "パネルを開く"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": ["https://world-switch.com/okoku/admin/products/*"]
+    }
+  ]
+}
